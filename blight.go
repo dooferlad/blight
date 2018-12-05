@@ -167,6 +167,6 @@ func (d DB) Set(bucket, key, value string) error {
 	return SetS(d.db, bucket, key, value)
 }
 
-func (d DB) Get(bucket, key, value string) (string, error) {
+func (d DB) Get(bucket, key string) (string, error) {
 	return GetS(d.db, bucket, key)
 }
