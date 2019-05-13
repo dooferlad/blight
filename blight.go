@@ -192,6 +192,12 @@ func (d DB) AllFunc(bucket string, fn func(k, v []byte)) error {
 	return err
 }
 
+func (d DB) Close() {
+	if err := d.db.Close(); err != nil {
+		logrus.Fatal(err)
+	}
+}
+
 func GetS(db *bolt.DB, bucket, key string) (string, error) {
 	v, err := Get(db, []byte(bucket), []byte(key))
 	return string(v), err
