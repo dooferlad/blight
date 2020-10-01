@@ -199,8 +199,11 @@ func (d DB) Close() {
 }
 
 func GetS(db *bolt.DB, bucket, key string) (string, error) {
-	v, err := Get(db, []byte(bucket), []byte(key))
-	return string(v), err
+	if v, err := Get(db, []byte(bucket), []byte(key)); err == nil {
+		return string(v), nil
+	} else {
+		return "", err
+	}
 }
 
 func (d DB) ResetBucket(bucket string) error {
